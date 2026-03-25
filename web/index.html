@@ -20,6 +20,10 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Mahmuod Murad Flutter Developer">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;800&display=swap" rel="stylesheet">
+
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -39,22 +43,27 @@
       overflow: hidden;
       width: 100vw;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: 'Outfit', sans-serif;
     }
     #loading-splash {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: #0A0E21;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      transition: opacity 0.8s ease-out;
+    }
+    .splash-content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      position: relative;
     }
     .wheel-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      /* Match the Flutter _horizontalSlide animation: -1.5 -> 0.0 */
-      animation: rollIn 3.5s cubic-bezier(0.21, 0.6, 0.35, 1) forwards;
+      position: relative;
+      animation: rollIn 3s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
     }
     .wheel {
       width: 160px;
@@ -62,18 +71,47 @@
       border-radius: 50%;
       border: 3px solid #00D9FF;
       box-shadow: 
-        0 0 30px rgba(0, 217, 255, 0.5), 
-        0 8px 40px rgba(255, 107, 0, 0.3);
+        0 0 30px rgba(0, 217, 255, 0.4), 
+        0 8px 40px rgba(255, 107, 0, 0.2);
       overflow: hidden;
       background-color: #1A1F3A;
-      /* Match the Flutter _rotation animation: 0 -> 6 * pi (1080 deg) */
-      animation: spin 3.5s cubic-bezier(0.21, 0.6, 0.35, 1) forwards;
+      animation: spin 3s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
     }
-    .wheel img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .wheel img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Moving Smoke Effect */
+    .smoke-emitter {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 20px;
+      pointer-events: none;
     }
+    .smoke {
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #ff4500 0%, #ff6b00 40%, transparent 80%);
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0;
+      animation: rise 2s infinite ease-out;
+    }
+    .s1 { left: 10%; animation-delay: 0s; }
+    .s2 { left: 30%; animation-delay: 0.4s; }
+    .s3 { left: 50%; animation-delay: 0.8s; }
+    .s4 { left: 70%; animation-delay: 1.2s; }
+    .s5 { left: 90%; animation-delay: 1.6s; }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      20% { opacity: 0.6; }
+      100% { transform: translateY(-80px) scale(3); opacity: 0; }
+    }
+
     @keyframes rollIn {
       0% { transform: translateX(-150vw); }
       100% { transform: translateX(0); }
@@ -82,22 +120,82 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(1080deg); }
     }
+
+    /* Text Animations */
+    .text-container {
+      margin-top: 40px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out 2.8s;
+    }
+    .text-container.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .name {
+      font-size: 32px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .role {
+      font-size: 18px;
+      font-weight: 500;
+      background: linear-gradient(90deg, #00D9FF, #7B2FFF);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+
     @media (max-width: 600px) {
-      .wheel {
-        width: 130px;
-        height: 130px;
-      }
+      .wheel { width: 130px; height: 130px; }
+      .name { font-size: 26px; }
+      .role { font-size: 16px; }
     }
   </style>
 </head>
 <body>
   <div id="loading-splash">
-    <div class="wheel-container">
-      <div class="wheel">
-        <img src="assets/assets/images/myimage.jpeg" alt="Loading...">
+    <div class="splash-content">
+      <div class="wheel-container">
+        <div class="smoke-emitter">
+          <div class="smoke s1"></div>
+          <div class="smoke s2"></div>
+          <div class="smoke s3"></div>
+          <div class="smoke s4"></div>
+          <div class="smoke s5"></div>
+        </div>
+        <div class="wheel">
+          <img src="assets/assets/images/myimage.jpeg" alt="Mahmoud Murad">
+        </div>
+      </div>
+      <div class="text-container" id="splash-text">
+        <div class="name">Mahmoud Murad</div>
+        <div class="role">Flutter Developer</div>
       </div>
     </div>
   </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      // Show text after wheel stops (around 2.8s - 3s)
+      setTimeout(function() {
+        document.getElementById('splash-text').classList.add('show');
+      }, 300); // Small delay to sync with CSS transition start
+
+      // Fade out splash after 4.5 seconds to ensure app is ready
+      setTimeout(function() {
+        var splash = document.getElementById('loading-splash');
+        splash.style.opacity = '0';
+        setTimeout(function() {
+          splash.style.display = 'none';
+        }, 800);
+      }, 4500);
+    });
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

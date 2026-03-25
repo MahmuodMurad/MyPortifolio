@@ -6,12 +6,12 @@
 | Token | Hex | Usage |
 |-------|-----|-------|
 | Background | `#0A0E21` | Main dark background |
-| Surface | `#1A1F3A` | Cards, containers |
-| Accent Primary | `#00D9FF` | Cyan/teal — CTAs, highlights |
+| Surface | `#1A1F3A` | Cards, containers (50-70% opacity) |
+| Accent Primary | `#00D9FF` | Cyan/teal — CTAs, highlights, Skill bar tips |
 | Accent Secondary | `#7B2FFF` | Purple — gradients, accents |
 | Text Primary | `#FFFFFF` | Headings |
 | Text Secondary | `#8D8DAA` | Body text, labels |
-| Glow | `#00D9FF` at 30% | Card hover glow, borders |
+| Glow | `#00D9FF` at 30-50% | Card hover glow, borders, Tech chips | 
 
 ### Typography
 - **Headings**: Outfit (Google Fonts) — Bold, modern geometric
@@ -27,24 +27,17 @@
 
 ## ✨ Animations Reference
 
-### Splash Screen
-- **Rotating Wheel**: Profile photo in a `ClipOval`, uses `AnimationController` with `Transform.rotate`. Duration: ~2s per rotation.
-- **Smoke Effect**: `CustomPainter` with 30-50 particle instances, each with random velocity/opacity. Particles drift upward and fade.
-- **Slide Right**: After 2 rotations, wheel slides right using `SlideTransition` (Curves.easeOutCubic, 1s).
-- **Name Writing**: `AnimatedTextKit` typewriter effect after wheel stops.
+### Splash Screen (Native HTML/CSS)
+- **Rotating Wheel**: Profile photo rolls from `-150vw` to center. Rotates 1080deg (6π) over 3s.
+- **Burning Smoke**: 5 layers of CSS particles rising from under the wheel with radial gradients and blur filters.
+- **Text Reveal**: Name and Role fade in + slide up after 2.8s.
+- **Lifecycle**: Handled by JS in `index.html` with a 4.5s timeout to allow Flutter to boot behind the scenes.
 
-### Section Entrance Animations
-- **Trigger**: `VisibilityDetector` fires when 30%+ visible.
-- **Effect**: `SlideTransition` from bottom (offset 0.3) + `FadeTransition` (0→1). Duration: 600ms, staggered 100ms per item.
-
-### Project & Contact Cards — Waving Animation
-- Uses `Transform.rotate` with a small angle oscillation: `sin(controller.value * 2π) * 0.02 radians`
-- Continuous subtle waving, amplified on hover to `0.04 radians`
-- Duration: 2s per cycle, `repeat()` with `Curves.easeInOut`
-
-### Skill Bars
-- Animated width from 0% → target using `Tween<double>` over 1.2s with `Curves.easeOutCubic`.
-- Gradient fill: Accent Primary → Accent Secondary.
+### Section Entrance Animations (Cyber-Modern Reveal)
+- **Experience Timeline**: Staggered slide-up + fade-in. Horizontal hover drift (+12px) and glowing vertical side-bar.
+- **Skill Bars**: Animated width (1.5s) with a glowing sphere at the progress tip.
+- **Tech Stack Cloud**: Dynamic collection of chips pulled from JSON. Interactive: Scale up (1.1x) + Outer glow on hover.
+- **Waving Animation**: Project & Contact cards feature a smooth `sin()` oscillation amplified on hover.
 
 ### Background Particles
 - 40-60 floating dots with random size (2-5px), speed, and opacity.
@@ -97,6 +90,13 @@ lib/
 ## 📱 Responsive Breakpoints
 | Size | Width | Layout |
 |------|-------|--------|
-| Mobile | < 600px | Single column, stacked |
+| Mobile | < 600px | Single column, stacked, 130px wheel |
 | Tablet | 600–1024px | 2-column grid |
-| Desktop | > 1024px | Multi-column, sidebar nav |
+| Desktop | > 1024px | Multi-column, sidebar nav, 160px wheel |
+
+---
+
+## 🚀 Deployment (GitHub Pages)
+- **Base Href**: Must be set to `"/MyPortifolio/"`.
+- **Renderer**: `--web-renderer html` used for fast initial loads.
+- **Native Splash**: Splash screen logic moved to `index.html` (CSS/JS) to eliminate white flash and provide 3s branded loading.
