@@ -1,0 +1,272 @@
+{
+  "personal_info": {
+    "name": "Mahmoud E. Murad",
+    "role": "Flutter Developer",
+    "location": "Alexandria, Egypt",
+    "phone": "01150374990",
+    "email": "mahmoudmorad56o@gmail.com",
+    "links": {
+      "github": "https://github.com/MahmuodMurad",
+      "portfolio": "https://mahmuodmurad.github.io/",
+      "whatsapp": "https://wa.me/201150374990",
+      "cv_download": "https://drive.google.com/file/d/1mqmvPm_FdSbkKA15ourMhC0krAkTXDJ9/view?usp=sharing"
+    },
+    "summary": "Bachelor’s degree in Computer Science – KSU. 2+ years of experience with Dart and Flutter. Fast learner, comfortable with new tools, platforms, and technologies. Experienced in integrating RESTful APIs and working with JSON for data exchange."
+  },
+  "experience": [
+    {
+      "role": "Flutter Developer",
+      "company": "Icon Tech Alexandria",
+      "period": "Sep 2024 – Mar 2025, Mar 2026 – Present",
+      "description": "Contributing to the development of high-quality mobile applications for a diverse range of clients."
+    },
+    {
+      "role": "Flutter Instructor",
+      "company": "Easy Way Academy Alexandria",
+      "period": "Jul 2024 – Mar 2025",
+      "description": "Trained students in Flutter development with industry skills and project experience."
+    },
+    {
+      "role": "Flutter Developer",
+      "company": "Queue Company Remote",
+      "period": "Oct 2023 – Aug 2024",
+      "description": "Software development firm specializing in web and mobile applications."
+    },
+    {
+      "role": "Flutter Instructor",
+      "company": "Black Horses Alexandria",
+      "period": "Dec 2023 – Jun 2024",
+      "description": "Instructor at Black Horses, providing specialized training and education."
+    },
+    {
+      "role": "Flutter Instructor",
+      "company": "GDSC KafrElshihk",
+      "period": "Oct 2023 – Jun 2024",
+      "description": "Head of Community, providing specialized training and education."
+    },
+    {
+      "role": "Flutter Developer",
+      "company": "UCCD KafrElshihk",
+      "period": "Jan 2023 – Oct 2023",
+      "description": "Volunteered at UCCD, developing faculty work systems for the university."
+    }
+  ],
+  "projects": [
+    {
+      "name": "Eldalel",
+      "description": "Contributed to the development of a new version of the app, featuring an updated user interface and the addition of key functionalities, including the 'dalel elwaz2ef' feature and optimized performance.",
+      "technologies": [
+        "Flutter",
+        "Provider",
+        "Riverpod",
+        "FCM",
+        "GitHub",
+        "Android Studio"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontds.a7sn_wa7ed",
+        "app_store": "https://apps.apple.com/us/app/eldalel-%D8%A7%D9%84%D8%AF%D9%84%D9%8A%D9%84/id6443826620"
+      }
+    },
+    {
+      "name": "Nottr",
+      "description": "Contributed to the development of a new app version by redesigning the user interface, enhancing core functionality, and optimizing overall performance and adding ZATCA QR.",
+      "technologies": [
+        "Flutter",
+        "Provider",
+        "GitHub",
+        "Android Studio",
+        "Xcode",
+        "Cursor"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontds.notter_client",
+        "app_store": "https://apps.apple.com/us/app/nottr/id6478277259"
+      }
+    },
+    {
+      "name": "AL Melhem",
+      "description": "Played a key role in developing a new app version with a refreshed user interface, enhanced key functionalities, and significant performance improvements.",
+      "technologies": [
+        "Flutter",
+        "Cubit",
+        "FCM",
+        "GitHub",
+        "Android Studio",
+        "Xcode"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.almelhem.icontds",
+        "app_store": "https://apps.apple.com/ec/app/%D8%A3%D8%B3%D8%B1%D8%A9-%D8%A2%D9%84-%D9%85%D9%84%D8%AD%D9%85/id6504810048"
+      }
+    },
+    {
+      "name": "PharmaShop",
+      "description": "Contributed to enhancing the PharmaShop app by improving overall performance, refining UI animations, and ensuring a smoother user experience. Implemented real-time chat and prescription scanning.",
+      "technologies": [
+        "Flutter",
+        "Cubit",
+        "FCM",
+        "GitHub",
+        "Android Studio",
+        "Xcode"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontech.pharmacy",
+        "app_store": "https://apps.apple.com/eg/app/pharmashop/id6648774724"
+      }
+    },
+    {
+      "name": "Meras",
+      "description": "Developed a gym app with package subscriptions, session scheduling, online and cash payments, and QR scanning for coaches.",
+      "technologies": [
+        "Flutter",
+        "Provider",
+        "Paylink payment",
+        "GitHub",
+        "Android Studio",
+        "Xcode",
+        "Windsurf"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontds.merasgym",
+        "app_store": "https://apps.apple.com/us/app/%D9%85%D8%B1%D8%A7%D8%B3-meras/id6738954150"
+      }
+    },
+    {
+      "name": "AlShateer",
+      "description": "Optimized image handling and caching for improved performance. Refined UI animations and accelerated load times.",
+      "technologies": [
+        "Flutter",
+        "Provider",
+        "GitHub"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.alshateer.icontds"
+      }
+    },
+    {
+      "name": "Request",
+      "description": "Coded Dart and Flutter framework using MVVM, FCM, GetX. Developed multi-platform order and store management apps.",
+      "technologies": [
+        "Flutter",
+        "GetX",
+        "FCM",
+        "GitHub",
+        "VS Code",
+        "Android Studio"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.Request.request",
+        "app_store": "https://apps.apple.com/us/app/request-%D8%A7%D8%B7%D9%84%D8%A8/id6756569829"
+      }
+    },
+    {
+      "name": "Mazid Mart",
+      "description": "Developed a production-ready e-commerce mobile application for silver products. Full-stack solution using Supabase and REST APIs.",
+      "technologies": [
+        "Flutter",
+        "Cubit",
+        "Supabase",
+        "REST API",
+        "FCM",
+        "GitHub"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.qatfa.mazid_silver_customer"
+      }
+    },
+    {
+      "name": "AlBarka",
+      "description": "Contributed to development and stability enhancements using Kotlin. Implemented force update and dynamic social media integrations.",
+      "technologies": [
+        "Kotlin",
+        "Android Studio",
+        "GitHub"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.techcubics.albarkahyper"
+      }
+    },
+    {
+      "name": "Aupos",
+      "description": "A point of sales application that allows businesses to manage transactions, track inventory, and generate sales reports efficiently.",
+      "technologies": [
+        "Flutter",
+        "GitHub",
+        "Android Studio"
+      ],
+      "links": {
+        "apk": "distributed as APK"
+      }
+    }
+  ],
+  "skills": {
+    "flutter_framework": [
+      {
+        "name": "Cubit",
+        "level": 0.95
+      },
+      {
+        "name": "Bloc",
+        "level": 0.9
+      },
+      {
+        "name": "Provider",
+        "level": 0.9
+      },
+      {
+        "name": "GetX",
+        "level": 0.85
+      },
+      {
+        "name": "Firebase",
+        "level": 0.9
+      },
+      {
+        "name": "REST API",
+        "level": 0.95
+      },
+      {
+        "name": "Animations",
+        "level": 0.9
+      },
+      {
+        "name": "Maps",
+        "level": 0.85
+      }
+    ],
+    "general_concepts": [
+      {
+        "name": "OOP & Design Patterns",
+        "level": 0.9
+      },
+      {
+        "name": "Kotlin",
+        "level": 0.75
+      },
+      {
+        "name": "Algorithm & Data Structure",
+        "level": 0.8
+      },
+      {
+        "name": "Git & GitHub",
+        "level": 0.95
+      },
+      {
+        "name": "AI Tools",
+        "level": 0.9
+      }
+    ],
+    "languages": [
+      {
+        "name": "Arabic",
+        "level": 1.0
+      },
+      {
+        "name": "English",
+        "level": 0.8
+      }
+    ]
+  }
+}
