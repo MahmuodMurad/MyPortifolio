@@ -124,63 +124,12 @@ class _ContactSectionState extends State<ContactSection>
           ),
           const SizedBox(height: 30),
           // Download CV Button
-          _buildDownloadCvButton(links),
+          _AnimatedDownloadButton(
+            url: links['cv_download'] as String? ?? '',
+            onLaunch: _launchUrl,
+            controller: _controller,
+          ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildDownloadCvButton(Map<String, dynamic> links) {
-    final cvUrl = links['cv_download'] as String? ?? '';
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        final progress =
-            ((_controller.value - 0.6) / 0.4).clamp(0.0, 1.0);
-        return Opacity(
-          opacity: progress,
-          child: Transform.translate(
-            offset: Offset(0, 20 * (1 - progress)),
-            child: child,
-          ),
-        );
-      },
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: cvUrl.isNotEmpty ? () => _launchUrl(cvUrl) : null,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
-            decoration: BoxDecoration(
-              gradient: AppColors.accentGradient,
-              borderRadius: BorderRadius.circular(30),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.accentPrimary.withValues(alpha: 0.35),
-                  blurRadius: 20,
-                  spreadRadius: 2,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.download_rounded,
-                    color: Colors.white, size: 22),
-                const SizedBox(width: 10),
-                Text(
-                  'Download CV',
-                  style: GoogleFonts.outfit(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -328,6 +277,139 @@ class _WavingContactCardState extends State<_WavingContactCard>
                   ),
                 ),
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AnimatedDownloadButton extends StatefulWidget {
+  final String url;
+  final Function(String) onLaunch;
+  final Animation<double> controller;
+
+  const _AnimatedDownloadButton({
+    required this.url,
+    required this.onLaunch,
+    required this.controller,
+  });
+
+  @override
+  State<_AnimatedDownloadButton> createState() =>
+      _AnimatedDownloadButtonState();
+}
+
+class _AnimatedDownloadButtonState extends State<_AnimatedDownloadButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _hoverIconController;
+  late Animation<double> _iconBounceAnimation;
+  bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _hoverIconController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+
+    _iconBounceAnimation = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween<double>(begin: 0, end: -4).chain(
+          CurveTween(curve: Curves.easeOut),
+        ),
+        weight: 50,
+      ),
+      TweenSequenceItem(
+        tween: Tween<double>(begin: -4, end: 0).chain(
+          CurveTween(curve: Curves.bounceOut),
+        ),
+        weight: 50,
+      ),
+    ]).animate(_hoverIconController);
+  }
+
+  @override
+  void dispose() {
+    _hoverIconController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: widget.controller,
+      builder: (context, child) {
+        final progress =
+            ((widget.controller.value - 0.6) / 0.4).clamp(0.0, 1.0);
+        return Opacity(
+          opacity: progress,
+          child: Transform.translate(
+            offset: Offset(0, 20 * (1 - progress)),
+            child: child,
+          ),
+        );
+      },
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) {
+          setState(() => _isHovered = true);
+          _hoverIconController.repeat();
+        },
+        onExit: (_) {
+          setState(() => _isHovered = false);
+          _hoverIconController.stop(canceled: false);
+          _hoverIconController.reverse();
+        },
+        child: GestureDetector(
+          onTap: widget.url.isNotEmpty ? () => widget.onLaunch(widget.url) : null,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            transform: Matrix4.diagonal3Values(
+                _isHovered ? 1.05 : 1.0, _isHovered ? 1.05 : 1.0, 1.0),
+            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
+            decoration: BoxDecoration(
+              gradient: AppColors.accentGradient,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.accentPrimary.withValues(
+                      alpha: _isHovered ? 0.6 : 0.35),
+                  blurRadius: _isHovered ? 30 : 20,
+                  spreadRadius: _isHovered ? 4 : 2,
+                  offset: Offset(0, _isHovered ? 8 : 4),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedBuilder(
+                  animation: _iconBounceAnimation,
+                  builder: (context, child) {
+                    return Transform.translate(
+                      offset: Offset(0, _iconBounceAnimation.value),
+                      child: child,
+                    );
+                  },
+                  child: const Icon(
+                    Icons.download_rounded,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  'Download CV',
+                  style: GoogleFonts.outfit(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

@@ -153,47 +153,54 @@ class _ProjectCardState extends State<ProjectCard>
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
-                        // Description
-                        Text(
-                          widget.project.description,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.poppins(
-                            fontSize: 13,
-                            color: AppColors.textSecondary,
-                            height: 1.5,
+                        // Scrollable Content Area (Description + Tech)
+                        Expanded(
+                          child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.project.description,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    color: AppColors.textSecondary,
+                                    height: 1.5,
+                                  ),
+                                ),
+                                const SizedBox(height: 14),
+                                // Tech tags
+                                Wrap(
+                                  spacing: 6,
+                                  runSpacing: 6,
+                                  children: widget.project.technologies
+                                      .map((tech) => Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 4),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.accentPrimary
+                                                  .withValues(alpha: 0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              border: Border.all(
+                                                color: AppColors.accentPrimary
+                                                    .withValues(alpha: 0.2),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              tech,
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 11,
+                                                color: AppColors.accentPrimary,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ))
+                                      .toList(),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 14),
-                        // Tech tags
-                        Wrap(
-                          spacing: 6,
-                          runSpacing: 6,
-                          children: widget.project.technologies
-                              .take(4)
-                              .map((tech) => Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.accentPrimary
-                                          .withValues(alpha: 0.1),
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: AppColors.accentPrimary
-                                            .withValues(alpha: 0.2),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      tech,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 11,
-                                        color: AppColors.accentPrimary,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
                         ),
                         const SizedBox(height: 14),
                         // Links

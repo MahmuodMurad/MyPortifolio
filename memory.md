@@ -28,10 +28,11 @@
 ## ✨ Animations Reference
 
 ### Splash Screen (Native HTML/CSS)
-- **Rotating Wheel**: Profile photo rolls from `-150vw` to center. Rotates 1080deg (6π) over 3s.
-- **Burning Smoke**: 5 layers of CSS particles rising from under the wheel with radial gradients and blur filters.
-- **Text Reveal**: Name and Role fade in + slide up after 2.8s.
-- **Lifecycle**: Handled by JS in `index.html` with a 4.5s timeout to allow Flutter to boot behind the scenes.
+- **Pulse Entrance**: The profile wheel appears with a scale (0.8 -> 1.0) and fade-in pulse effect.
+- **Glowing Atmosphere**: Intense cyan outer glow (`box-shadow`) that pulses with the wheel.
+- **Burning Smoke**: 4 layers of rising smoke particles beneath the wheel.
+- **Typewriter Text**: JS-driven letter-by-letter reveal for "Mahmoud Murad", followed by a fade-in for the role.
+- **Lifecycle**: ~4.8s total duration to allow completion of the typewriter effect before fading out.
 
 ### Section Entrance Animations (Cyber-Modern Reveal)
 - **Experience Timeline**: Staggered slide-up + fade-in. Horizontal hover drift (+12px) and glowing vertical side-bar.

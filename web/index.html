@@ -53,7 +53,7 @@
       justify-content: center;
       align-items: center;
       z-index: 99999;
-      transition: opacity 0.8s ease-out;
+      transition: opacity 1s ease-out;
     }
     .splash-content {
       display: flex;
@@ -63,7 +63,9 @@
     }
     .wheel-container {
       position: relative;
-      animation: rollIn 3s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: appearPulse 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     .wheel {
       width: 160px;
@@ -71,88 +73,81 @@
       border-radius: 50%;
       border: 3px solid #00D9FF;
       box-shadow: 
-        0 0 30px rgba(0, 217, 255, 0.4), 
-        0 8px 40px rgba(255, 107, 0, 0.2);
+        0 0 50px rgba(0, 217, 255, 0.6), 
+        0 0 100px rgba(0, 217, 255, 0.2);
       overflow: hidden;
       background-color: #1A1F3A;
-      animation: spin 3s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
     }
     .wheel img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Moving Smoke Effect */
+    /* Moving Smoke Effect (Stayed as requested) */
     .smoke-emitter {
       position: absolute;
-      bottom: -10px;
+      bottom: -15px;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
-      height: 20px;
+      width: 120px;
+      height: 40px;
       pointer-events: none;
     }
     .smoke {
       position: absolute;
       bottom: 0;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #ff4500 0%, #ff6b00 40%, transparent 80%);
+      width: 25px;
+      height: 25px;
+      background: radial-gradient(circle, #ff4500 0%, #ff6b00 40%, transparent 85%);
       border-radius: 50%;
-      filter: blur(10px);
+      filter: blur(12px);
       opacity: 0;
-      animation: rise 2s infinite ease-out;
+      animation: rise 2.5s infinite ease-out;
     }
-    .s1 { left: 10%; animation-delay: 0s; }
-    .s2 { left: 30%; animation-delay: 0.4s; }
-    .s3 { left: 50%; animation-delay: 0.8s; }
-    .s4 { left: 70%; animation-delay: 1.2s; }
-    .s5 { left: 90%; animation-delay: 1.6s; }
+    .s1 { left: 10%; animation-delay: 0.2s; }
+    .s2 { left: 35%; animation-delay: 0.7s; }
+    .s3 { left: 55%; animation-delay: 1.2s; }
+    .s4 { left: 80%; animation-delay: 1.7s; }
 
     @keyframes rise {
       0% { transform: translateY(0) scale(1); opacity: 0; }
-      20% { opacity: 0.6; }
-      100% { transform: translateY(-80px) scale(3); opacity: 0; }
+      20% { opacity: 0.7; }
+      100% { transform: translateY(-100px) scale(3.5); opacity: 0; }
     }
 
-    @keyframes rollIn {
-      0% { transform: translateX(-150vw); }
-      100% { transform: translateX(0); }
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(1080deg); }
+    @keyframes appearPulse {
+      0% { opacity: 0; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     /* Text Animations */
     .text-container {
-      margin-top: 40px;
+      margin-top: 45px;
       text-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.8s ease-out 2.8s;
-    }
-    .text-container.show {
-      opacity: 1;
-      transform: translateY(0);
+      min-height: 80px;
     }
     .name {
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 800;
       color: #FFFFFF;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      min-height: 42px;
     }
     .role {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 500;
       background: linear-gradient(90deg, #00D9FF, #7B2FFF);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      opacity: 0;
+      transition: opacity 1s ease-in;
     }
+    .role.show { opacity: 1; }
 
     @media (max-width: 600px) {
       .wheel { width: 130px; height: 130px; }
-      .name { font-size: 26px; }
+      .name { font-size: 28px; }
       .role { font-size: 16px; }
     }
   </style>
@@ -166,34 +161,54 @@
           <div class="smoke s2"></div>
           <div class="smoke s3"></div>
           <div class="smoke s4"></div>
-          <div class="smoke s5"></div>
         </div>
         <div class="wheel">
           <img src="assets/assets/images/myimage.jpeg" alt="Mahmoud Murad">
         </div>
       </div>
-      <div class="text-container" id="splash-text">
-        <div class="name">Mahmoud Murad</div>
-        <div class="role">Flutter Developer</div>
+      <div class="text-container">
+        <div class="name" id="typewriter-name"></div>
+        <div class="role" id="typewriter-role">Flutter Developer</div>
       </div>
     </div>
   </div>
 
   <script>
-    window.addEventListener('load', function() {
-      // Show text after wheel stops (around 2.8s - 3s)
-      setTimeout(function() {
-        document.getElementById('splash-text').classList.add('show');
-      }, 300); // Small delay to sync with CSS transition start
+    function typeWriter(text, elementId, speed, callback) {
+      let i = 0;
+      let element = document.getElementById(elementId);
+      element.innerHTML = "";
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else if (callback) {
+          callback();
+        }
+      }
+      type();
+    }
 
-      // Fade out splash after 4.5 seconds to ensure app is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Start typewriter immediately (no delay)
+      setTimeout(function() {
+        typeWriter("Mahmoud Murad", "typewriter-name", 80, function() {
+          // Fade in role after name is typed
+          document.getElementById('typewriter-role').classList.add('show');
+        });
+      }, 0);
+
+      // Total splash duration: 4.5s
       setTimeout(function() {
         var splash = document.getElementById('loading-splash');
-        splash.style.opacity = '0';
-        setTimeout(function() {
-          splash.style.display = 'none';
-        }, 800);
-      }, 4500);
+        if (splash) {
+          splash.style.opacity = '0';
+          setTimeout(function() {
+            splash.style.display = 'none';
+          }, 1000);
+        }
+      }, 4800);
     });
   </script>
   <script src="flutter_bootstrap.js" async></script>

@@ -249,12 +249,19 @@ class _ExperienceCardWrapperState extends State<_ExperienceCardWrapper> {
                                   ],
                                 ),
                                 const SizedBox(height: 12),
-                                Text(
-                                  widget.exp.description,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    color: AppColors.textSecondary,
-                                    height: 1.6,
+                                // Scrollable Description
+                                ConstrainedBox(
+                                  constraints: const BoxConstraints(maxHeight: 120),
+                                  child: SingleChildScrollView(
+                                    physics: const BouncingScrollPhysics(),
+                                    child: Text(
+                                      widget.exp.description,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        color: AppColors.textSecondary,
+                                        height: 1.6,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
