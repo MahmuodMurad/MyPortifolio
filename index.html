@@ -1,27 +1,7 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <script>
-    // GitHub Pages auto base-href resolver
-    (function () {
-      var pathname = window.location.pathname;
-      if (window.location.hostname.endsWith('github.io') && pathname.length > 1) {
-        var segments = pathname.split('/').filter(Boolean);
-        if (segments.length > 0) {
-          var repo = segments[0];
-          var base = document.querySelector('base');
-          var targetHref = '/' + repo + '/';
-          if (base) {
-            base.setAttribute('href', targetHref);
-          } else {
-            var el = document.createElement('base');
-            el.setAttribute('href', targetHref);
-            document.head.prepend(el);
-          }
-        }
-      }
-    })();
-  </script>
   <base href="/MyPortifolio/">
 
   <meta charset="UTF-8">
@@ -31,199 +11,33 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet">
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Mahmoud Murad">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>Mahmoud Murad | Flutter and Backend Developer</title>
   <link rel="manifest" href="manifest.json">
   <style>
-    :root {
-      --bg: #07110f;
-      --ink: #0c1210;
-      --panel: #17201d;
-      --mint: #45e0c2;
-      --gold: #ffc857;
-      --coral: #ff6b5e;
-      --text: #ffffff;
-      --muted: #b2c3bd;
-    }
-
-    html, body {
+    html,
+    body {
       margin: 0;
       min-height: 100%;
       width: 100%;
-      background: var(--bg);
+      background: #07110F;
       overflow: hidden;
       font-family: "Poppins", sans-serif;
     }
-
-    #loading-splash {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      display: grid;
-      place-items: center;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(135deg, var(--bg), var(--ink) 48%, #111816);
-      background-size: 46px 46px, 46px 46px, auto;
-      transition: opacity .72s ease, visibility .72s ease;
-    }
-
-    #loading-splash.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .splash-shell {
-      position: relative;
-      display: grid;
-      place-items: center;
-      gap: 28px;
-      padding: 32px;
-      text-align: center;
-      animation: intro .72s cubic-bezier(.22, 1, .36, 1) both;
-    }
-
-    .portrait-stage {
-      position: relative;
-      width: 218px;
-      height: 218px;
-      display: grid;
-      place-items: center;
-    }
-
-    .frame-a,
-    .frame-b {
-      position: absolute;
-      inset: 14px;
-      border: 2px solid rgba(69, 224, 194, .48);
-      border-radius: 8px;
-      animation: spinA 5.2s linear infinite;
-    }
-
-    .frame-b {
-      inset: 30px;
-      border-color: rgba(255, 200, 87, .48);
-      animation: spinB 7.4s linear infinite;
-    }
-
-    .portrait {
-      width: 142px;
-      height: 142px;
-      object-fit: cover;
-      object-position: top center;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 24px 70px rgba(0,0,0,.45);
-    }
-
-    .scan {
-      position: absolute;
-      left: -12vw;
-      right: -12vw;
-      top: 20%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--mint), transparent);
-      opacity: .55;
-      transform: rotate(-8deg);
-      animation: scan 2.3s ease-in-out infinite;
-    }
-
-    .name {
-      margin: 0;
-      color: var(--text);
-      font-family: "Outfit", sans-serif;
-      font-size: clamp(2.25rem, 6vw, 4rem);
-      font-weight: 900;
-      letter-spacing: 0;
-      line-height: .96;
-    }
-
-    .role {
-      margin: 10px 0 0;
-      font-size: clamp(.9rem, 2.4vw, 1.1rem);
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .bar {
-      width: min(280px, 72vw);
-      height: 8px;
-      overflow: hidden;
-      border-radius: 8px;
-      background: rgba(255,255,255,.09);
-    }
-
-    .bar::before {
-      content: "";
-      display: block;
-      width: 42%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--mint), var(--gold), var(--coral));
-      animation: load 1.4s ease-in-out infinite;
-    }
-
-    @keyframes intro {
-      from { opacity: 0; transform: translateY(24px) scale(.96); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes spinA {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes spinB {
-      to { transform: rotate(-360deg); }
-    }
-
-    @keyframes scan {
-      0% { transform: translateY(-80px) rotate(-8deg); opacity: 0; }
-      35% { opacity: .7; }
-      100% { transform: translateY(210px) rotate(-8deg); opacity: 0; }
-    }
-
-    @keyframes load {
-      0% { transform: translateX(-105%); }
-      100% { transform: translateX(245%); }
-    }
   </style>
 </head>
+
 <body>
-  <div id="loading-splash">
-    <div class="scan"></div>
-    <main class="splash-shell" aria-label="Loading portfolio">
-      <section class="portrait-stage">
-        <div class="frame-a"></div>
-        <div class="frame-b"></div>
-        <img class="portrait" src="assets/assets/images/myimage.jpeg" onerror="this.onerror=null;this.src='assets/images/myimage.jpeg';" alt="Mahmoud Murad">
-      </section>
-      <section>
-        <h1 class="name">Mahmoud E. Murad</h1>
-        <p class="role">Flutter + Backend Developer</p>
-      </section>
-      <div class="bar" aria-hidden="true"></div>
-    </main>
-  </div>
-
-  <script>
-    window.addEventListener("flutter-first-frame", function () {
-      var splash = document.getElementById("loading-splash");
-      if (splash) splash.classList.add("hide");
-    });
-
-    setTimeout(function () {
-      var splash = document.getElementById("loading-splash");
-      if (splash) splash.classList.add("hide");
-    }, 2400);
-  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
+
 </html>
