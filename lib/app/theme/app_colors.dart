@@ -3,36 +3,33 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  // Background
-  static const Color background = Color(0xFF0A0E21);
-  static const Color surface = Color(0xFF1A1F3A);
-  static const Color surfaceLight = Color(0xFF252A4A);
+  static const Color background = Color(0xFF07110F);
+  static const Color backgroundAlt = Color(0xFF111816);
+  static const Color surface = Color(0xFF17201D);
+  static const Color surfaceLight = Color(0xFF20302B);
+  static const Color ink = Color(0xFF0C1210);
 
-  // Accents
-  static const Color accentPrimary = Color(0xFF00D9FF);
-  static const Color accentSecondary = Color(0xFF7B2FFF);
+  static const Color accentPrimary = Color(0xFF45E0C2);
+  static const Color accentSecondary = Color(0xFF34D399);
+  static const Color accentTertiary = Color(0xFF059669);
+  static const Color accentBlue = Color(0xFF5DB7DE);
 
-  // Text
   static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFF8D8DAA);
+  static const Color textSecondary = Color(0xFFB2C3BD);
+  static const Color textMuted = Color(0xFF71827C);
 
-  // Gradients
   static const LinearGradient accentGradient = LinearGradient(
-    colors: [accentPrimary, accentSecondary],
+    colors: [accentPrimary, accentSecondary, accentTertiary],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient cardGradient = LinearGradient(
-    colors: [
-      Color(0x991A1F3A),
-      Color(0x661A1F3A),
-    ],
+    colors: [Color(0xCC17201D), Color(0x8820302B)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
-  // Glow
-  static const Color glow = Color(0x4D00D9FF);
-  static const Color glowPurple = Color(0x4D7B2FFF);
+  static const Color glow = Color(0x4D45E0C2);
+  static const Color glowWarm = Color(0x4D34D399);
 }

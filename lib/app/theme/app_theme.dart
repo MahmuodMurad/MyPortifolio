@@ -19,7 +19,7 @@ class AppTheme {
         color: AppColors.surface.withValues(alpha: 0.6),
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
           side: BorderSide(
             color: AppColors.accentPrimary.withValues(alpha: 0.15),
           ),
@@ -30,18 +30,14 @@ class AppTheme {
           backgroundColor: AppColors.accentPrimary,
           foregroundColor: AppColors.background,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           textStyle: GoogleFonts.outfit(
             fontWeight: FontWeight.w600,
             fontSize: 16,
           ),
         ),
       ),
-      iconTheme: const IconThemeData(
-        color: AppColors.accentPrimary,
-      ),
+      iconTheme: const IconThemeData(color: AppColors.accentPrimary),
     );
   }
 
@@ -51,13 +47,13 @@ class AppTheme {
         fontSize: 56,
         fontWeight: FontWeight.w800,
         color: AppColors.textPrimary,
-        letterSpacing: -1.5,
+        letterSpacing: 0,
       ),
       displayMedium: GoogleFonts.outfit(
         fontSize: 40,
         fontWeight: FontWeight.w700,
         color: AppColors.textPrimary,
-        letterSpacing: -0.5,
+        letterSpacing: 0,
       ),
       headlineLarge: GoogleFonts.outfit(
         fontSize: 32,

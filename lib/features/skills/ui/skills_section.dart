@@ -8,6 +8,7 @@ import '../../../core/utils/responsive.dart';
 import '../../../core/widgets/section_title.dart';
 import '../cubit/skills_cubit.dart';
 import '../models/skill_model.dart';
+import 'mobile_skills_view.dart';
 import 'skill_bar.dart';
 
 class SkillsSection extends StatefulWidget {
@@ -45,8 +46,9 @@ class _SkillsSectionState extends State<SkillsSection>
       create: (_) => SkillsCubit(),
       child: Container(
         padding: Responsive.getSectionPadding(context),
-        constraints:
-            BoxConstraints(maxWidth: Responsive.getContentWidth(context)),
+        constraints: BoxConstraints(
+          maxWidth: Responsive.getContentWidth(context),
+        ),
         child: Column(
           children: [
             const SectionTitle(
@@ -56,6 +58,16 @@ class _SkillsSectionState extends State<SkillsSection>
             BlocBuilder<SkillsCubit, SkillsState>(
               builder: (context, state) {
                 final isDesktop = Responsive.isDesktop(context);
+                final isMobile = Responsive.isMobile(context);
+
+                if (isMobile) {
+                  return MobileSkillsView(
+                    flutterSkills: state.flutterSkills,
+                    generalSkills: state.generalSkills,
+                    languages: state.languages,
+                  );
+                }
+
                 final categories = [
                   _buildCategory(
                     'Flutter Framework',
@@ -97,9 +109,11 @@ class _SkillsSectionState extends State<SkillsSection>
                         ],
                       )
                     else
-                      ...categories.expand((cat) => [cat, const SizedBox(height: 24)]),
-                    
-                    const SizedBox(height: 60),
+                      ...categories.expand(
+                        (cat) => [cat, const SizedBox(height: 24)],
+                      ),
+
+                    SizedBox(height: isMobile ? 36 : 60),
                     _buildTechCloud(),
                   ],
                 );
@@ -117,6 +131,7 @@ class _SkillsSectionState extends State<SkillsSection>
     List<SkillModel> skills,
     int baseDelay,
   ) {
+    final isMobile = Responsive.isMobile(context);
     final start = (baseDelay / 20) * 0.5;
     final animation = CurvedAnimation(
       parent: _controller,
@@ -128,21 +143,18 @@ class _SkillsSectionState extends State<SkillsSection>
       builder: (context, child) {
         return Transform.translate(
           offset: Offset(0, 30 * (1 - animation.value)),
-          child: Opacity(
-            opacity: animation.value,
-            child: child,
-          ),
+          child: Opacity(opacity: animation.value, child: child),
         );
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(isMobile ? 14 : 20),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
-            padding: const EdgeInsets.all(24),
+            padding: EdgeInsets.all(isMobile ? 16 : 24),
             decoration: BoxDecoration(
               color: AppColors.surface.withValues(alpha: 0.5),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(isMobile ? 14 : 20),
               border: Border.all(
                 color: AppColors.accentPrimary.withValues(alpha: 0.1),
               ),
@@ -181,10 +193,21 @@ class _SkillsSectionState extends State<SkillsSection>
   }
 
   Widget _buildTechCloud() {
+    final isMobile = Responsive.isMobile(context);
     final allTech = CvDataProvider.experience
-        .fold<Set<String>>({}, (prev, curr) => prev..addAll((curr['technologies'] as List? ?? []).cast<String>()))
-        .union(CvDataProvider.projects
-            .fold<Set<String>>({}, (prev, curr) => prev..addAll((curr['technologies'] as List? ?? []).cast<String>())))
+        .fold<Set<String>>(
+          {},
+          (prev, curr) =>
+              prev
+                ..addAll((curr['technologies'] as List? ?? []).cast<String>()),
+        )
+        .union(
+          CvDataProvider.projects.fold<Set<String>>(
+            {},
+            (prev, curr) => prev
+              ..addAll((curr['technologies'] as List? ?? []).cast<String>()),
+          ),
+        )
         .toList();
 
     return Column(
@@ -192,16 +215,16 @@ class _SkillsSectionState extends State<SkillsSection>
         Text(
           'Tech Stack Cloud',
           style: GoogleFonts.outfit(
-            fontSize: 22,
+            fontSize: isMobile ? 19 : 22,
             fontWeight: FontWeight.w700,
             color: AppColors.textPrimary,
             letterSpacing: 1,
           ),
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: isMobile ? 16 : 24),
         Wrap(
-          spacing: 12,
-          runSpacing: 12,
+          spacing: isMobile ? 8 : 12,
+          runSpacing: isMobile ? 8 : 12,
           alignment: WrapAlignment.center,
           children: allTech.map((tech) => _TechChip(tech: tech)).toList(),
         ),
@@ -223,12 +246,17 @@ class _TechChipState extends State<_TechChip> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
+
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        padding: EdgeInsets.symmetric(
+          vertical: isMobile ? 6 : 8,
+          horizontal: isMobile ? 12 : 16,
+        ),
         decoration: BoxDecoration(
           color: _isHovered
               ? AppColors.accentPrimary.withValues(alpha: 0.15)
@@ -245,16 +273,18 @@ class _TechChipState extends State<_TechChip> {
                   BoxShadow(
                     color: AppColors.accentPrimary.withValues(alpha: 0.2),
                     blurRadius: 10,
-                  )
+                  ),
                 ]
               : [],
         ),
         child: Text(
           widget.tech,
           style: GoogleFonts.jetBrainsMono(
-            fontSize: 12,
+            fontSize: isMobile ? 11 : 12,
             fontWeight: _isHovered ? FontWeight.w600 : FontWeight.w400,
-            color: _isHovered ? AppColors.accentPrimary : AppColors.textSecondary,
+            color: _isHovered
+                ? AppColors.accentPrimary
+                : AppColors.textSecondary,
           ),
         ),
       ),

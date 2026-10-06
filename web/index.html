@@ -1,215 +1,207 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Mahmuod Murad Flutter Developer">
+  <meta name="description" content="Mahmoud E. Murad - Flutter and Backend Developer portfolio">
+  <meta name="theme-color" content="#07110F">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="my_portifolio">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mahmoud Murad">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>MahmuodMurad</title>
+  <title>Mahmoud Murad | Flutter and Backend Developer</title>
   <link rel="manifest" href="manifest.json">
-<style>
-    body {
-      background-color: #0A0E21;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      width: 100vw;
-      height: 100vh;
-      font-family: 'Outfit', sans-serif;
+  <style>
+    :root {
+      --bg: #07110f;
+      --ink: #0c1210;
+      --panel: #17201d;
+      --mint: #45e0c2;
+      --gold: #ffc857;
+      --coral: #ff6b5e;
+      --text: #ffffff;
+      --muted: #b2c3bd;
     }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      width: 100%;
+      background: var(--bg);
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+    }
+
     #loading-splash {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-color: #0A0E21;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      inset: 0;
       z-index: 99999;
-      transition: opacity 1s ease-out;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(135deg, var(--bg), var(--ink) 48%, #111816);
+      background-size: 46px 46px, 46px 46px, auto;
+      transition: opacity .72s ease, visibility .72s ease;
     }
-    .splash-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-    .wheel-container {
-      position: relative;
+
+    #loading-splash.hide {
       opacity: 0;
-      transform: scale(0.8);
-      animation: appearPulse 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-    .wheel {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 3px solid #00D9FF;
-      box-shadow: 
-        0 0 50px rgba(0, 217, 255, 0.6), 
-        0 0 100px rgba(0, 217, 255, 0.2);
-      overflow: hidden;
-      background-color: #1A1F3A;
-    }
-    .wheel img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* Moving Smoke Effect (Stayed as requested) */
-    .smoke-emitter {
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 40px;
-      pointer-events: none;
-    }
-    .smoke {
-      position: absolute;
-      bottom: 0;
-      width: 25px;
-      height: 25px;
-      background: radial-gradient(circle, #ff4500 0%, #ff6b00 40%, transparent 85%);
-      border-radius: 50%;
-      filter: blur(12px);
-      opacity: 0;
-      animation: rise 2.5s infinite ease-out;
-    }
-    .s1 { left: 10%; animation-delay: 0.2s; }
-    .s2 { left: 35%; animation-delay: 0.7s; }
-    .s3 { left: 55%; animation-delay: 1.2s; }
-    .s4 { left: 80%; animation-delay: 1.7s; }
-
-    @keyframes rise {
-      0% { transform: translateY(0) scale(1); opacity: 0; }
-      20% { opacity: 0.7; }
-      100% { transform: translateY(-100px) scale(3.5); opacity: 0; }
+      visibility: hidden;
     }
 
-    @keyframes appearPulse {
-      0% { opacity: 0; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.05); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Text Animations */
-    .text-container {
-      margin-top: 45px;
+    .splash-shell {
+      position: relative;
+      display: grid;
+      place-items: center;
+      gap: 28px;
+      padding: 32px;
       text-align: center;
-      min-height: 80px;
+      animation: intro .72s cubic-bezier(.22, 1, .36, 1) both;
     }
-    .name {
-      font-size: 34px;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      min-height: 42px;
-    }
-    .role {
-      font-size: 20px;
-      font-weight: 500;
-      background: linear-gradient(90deg, #00D9FF, #7B2FFF);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 3px;
-      opacity: 0;
-      transition: opacity 1s ease-in;
-    }
-    .role.show { opacity: 1; }
 
-    @media (max-width: 600px) {
-      .wheel { width: 130px; height: 130px; }
-      .name { font-size: 28px; }
-      .role { font-size: 16px; }
+    .portrait-stage {
+      position: relative;
+      width: 218px;
+      height: 218px;
+      display: grid;
+      place-items: center;
+    }
+
+    .frame-a,
+    .frame-b {
+      position: absolute;
+      inset: 14px;
+      border: 2px solid rgba(69, 224, 194, .48);
+      border-radius: 8px;
+      animation: spinA 5.2s linear infinite;
+    }
+
+    .frame-b {
+      inset: 30px;
+      border-color: rgba(255, 200, 87, .48);
+      animation: spinB 7.4s linear infinite;
+    }
+
+    .portrait {
+      width: 142px;
+      height: 142px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 24px 70px rgba(0,0,0,.45);
+    }
+
+    .scan {
+      position: absolute;
+      left: -12vw;
+      right: -12vw;
+      top: 20%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--mint), transparent);
+      opacity: .55;
+      transform: rotate(-8deg);
+      animation: scan 2.3s ease-in-out infinite;
+    }
+
+    .name {
+      margin: 0;
+      color: var(--text);
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: .96;
+    }
+
+    .role {
+      margin: 10px 0 0;
+      font-size: clamp(.9rem, 2.4vw, 1.1rem);
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .bar {
+      width: min(280px, 72vw);
+      height: 8px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: rgba(255,255,255,.09);
+    }
+
+    .bar::before {
+      content: "";
+      display: block;
+      width: 42%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--mint), var(--gold), var(--coral));
+      animation: load 1.4s ease-in-out infinite;
+    }
+
+    @keyframes intro {
+      from { opacity: 0; transform: translateY(24px) scale(.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes spinA {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spinB {
+      to { transform: rotate(-360deg); }
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-80px) rotate(-8deg); opacity: 0; }
+      35% { opacity: .7; }
+      100% { transform: translateY(210px) rotate(-8deg); opacity: 0; }
+    }
+
+    @keyframes load {
+      0% { transform: translateX(-105%); }
+      100% { transform: translateX(245%); }
     }
   </style>
 </head>
 <body>
   <div id="loading-splash">
-    <div class="splash-content">
-      <div class="wheel-container">
-        <div class="smoke-emitter">
-          <div class="smoke s1"></div>
-          <div class="smoke s2"></div>
-          <div class="smoke s3"></div>
-          <div class="smoke s4"></div>
-        </div>
-        <div class="wheel">
-          <img src="assets/assets/images/myimage.jpeg" alt="Mahmoud Murad">
-        </div>
-      </div>
-      <div class="text-container">
-        <div class="name" id="typewriter-name"></div>
-        <div class="role" id="typewriter-role">Flutter Developer</div>
-      </div>
-    </div>
+    <div class="scan"></div>
+    <main class="splash-shell" aria-label="Loading portfolio">
+      <section class="portrait-stage">
+        <div class="frame-a"></div>
+        <div class="frame-b"></div>
+        <img class="portrait" src="assets/assets/images/myimage.jpeg" alt="Mahmoud Murad">
+      </section>
+      <section>
+        <h1 class="name">Mahmoud E. Murad</h1>
+        <p class="role">Flutter + Backend Developer</p>
+      </section>
+      <div class="bar" aria-hidden="true"></div>
+    </main>
   </div>
 
   <script>
-    function typeWriter(text, elementId, speed, callback) {
-      let i = 0;
-      let element = document.getElementById(elementId);
-      element.innerHTML = "";
-      function type() {
-        if (i < text.length) {
-          element.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        } else if (callback) {
-          callback();
-        }
-      }
-      type();
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // Start typewriter immediately (no delay)
-      setTimeout(function() {
-        typeWriter("Mahmoud Murad", "typewriter-name", 80, function() {
-          // Fade in role after name is typed
-          document.getElementById('typewriter-role').classList.add('show');
-        });
-      }, 0);
-
-      // Total splash duration: 4.5s
-      setTimeout(function() {
-        var splash = document.getElementById('loading-splash');
-        if (splash) {
-          splash.style.opacity = '0';
-          setTimeout(function() {
-            splash.style.display = 'none';
-          }, 1000);
-        }
-      }, 4800);
+    window.addEventListener("flutter-first-frame", function () {
+      var splash = document.getElementById("loading-splash");
+      if (splash) splash.classList.add("hide");
     });
+
+    setTimeout(function () {
+      var splash = document.getElementById("loading-splash");
+      if (splash) splash.classList.add("hide");
+    }, 2400);
   </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>

@@ -22,23 +22,28 @@ class SkillsCubit extends Cubit<SkillsState> {
   void _loadSkills() {
     final skills = CvDataProvider.skills;
 
-    final flutter = (skills['flutter_framework'] as List<dynamic>?)
+    final flutter =
+        (skills['flutter_framework'] as List<dynamic>?)
             ?.map((s) => SkillModel.fromJson(s as Map<String, dynamic>))
             .toList() ??
         [];
-    final general = (skills['general_concepts'] as List<dynamic>?)
+    final general =
+        (skills['general_concepts'] as List<dynamic>?)
             ?.map((s) => SkillModel.fromJson(s as Map<String, dynamic>))
             .toList() ??
         [];
-    final langs = (skills['languages'] as List<dynamic>?)
+    final langs =
+        (skills['languages'] as List<dynamic>?)
             ?.map((s) => SkillModel.fromJson(s as Map<String, dynamic>))
             .toList() ??
         [];
 
-    emit(SkillsState(
-      flutterSkills: flutter,
-      generalSkills: general,
-      languages: langs,
-    ));
+    emit(
+      SkillsState(
+        flutterSkills: flutter,
+        generalSkills: general,
+        languages: langs,
+      ),
+    );
   }
 }

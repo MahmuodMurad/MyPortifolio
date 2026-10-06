@@ -6,6 +6,7 @@ import '../../../core/data/cv_data_provider.dart';
 import '../../../core/utils/responsive.dart';
 import '../../../core/widgets/section_title.dart';
 import '../models/experience_model.dart';
+import 'mobile_experience_view.dart';
 
 class ExperienceSection extends StatefulWidget {
   const ExperienceSection({super.key});
@@ -43,20 +44,27 @@ class _ExperienceSectionState extends State<ExperienceSection>
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
+
     return Container(
       padding: Responsive.getSectionPadding(context),
-      constraints: BoxConstraints(maxWidth: Responsive.getContentWidth(context)),
+      constraints: BoxConstraints(
+        maxWidth: Responsive.getContentWidth(context),
+      ),
       child: Column(
         children: [
           const SectionTitle(
             title: 'Experience',
             subtitle: 'My professional journey',
           ),
-          ..._experiences.asMap().entries.map((entry) {
+          if (isMobile)
+            MobileExperienceView(experiences: _experiences)
+          else
+            ..._experiences.asMap().entries.map((entry) {
             final i = entry.key;
             final exp = entry.value;
             final isLast = i == _experiences.length - 1;
-            
+
             // Staggered interval for entrance
             final start = (i / _experiences.length) * 0.5;
             final end = start + 0.5;
@@ -70,10 +78,7 @@ class _ExperienceSectionState extends State<ExperienceSection>
               builder: (context, child) {
                 return Transform.translate(
                   offset: Offset(0, 40 * (1 - animation.value)),
-                  child: Opacity(
-                    opacity: animation.value,
-                    child: child,
-                  ),
+                  child: Opacity(opacity: animation.value, child: child),
                 );
               },
               child: _ExperienceCardWrapper(exp: exp, isLast: isLast),
@@ -100,19 +105,21 @@ class _ExperienceCardWrapperState extends State<_ExperienceCardWrapper> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
+
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Timeline indicator
           SizedBox(
-            width: 30,
+            width: isMobile ? 24 : 30,
             child: Column(
               children: [
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
-                  width: _isHovered ? 18 : 14,
-                  height: _isHovered ? 18 : 14,
+                  width: _isHovered ? 18 : (isMobile ? 12 : 14),
+                  height: _isHovered ? 18 : (isMobile ? 12 : 14),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: AppColors.accentGradient,
@@ -146,7 +153,7 @@ class _ExperienceCardWrapperState extends State<_ExperienceCardWrapper> {
               ],
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: isMobile ? 12 : 16),
           // Interactive Card
           Expanded(
             child: MouseRegion(
@@ -155,23 +162,23 @@ class _ExperienceCardWrapperState extends State<_ExperienceCardWrapper> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 400),
                 curve: Curves.easeOutCubic,
-                margin: const EdgeInsets.only(bottom: 32),
+                margin: EdgeInsets.only(bottom: isMobile ? 20 : 32),
                 transform: Matrix4.translationValues(
                   _isHovered ? 12.0 : 0.0,
                   0.0,
                   0.0,
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(isMobile ? 14 : 20),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      padding: const EdgeInsets.all(24),
+                      padding: EdgeInsets.all(isMobile ? 16 : 24),
                       decoration: BoxDecoration(
                         color: AppColors.surface.withValues(
                           alpha: _isHovered ? 0.7 : 0.5,
                         ),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(isMobile ? 14 : 20),
                         border: Border.all(
                           color: AppColors.accentPrimary.withValues(
                             alpha: _isHovered ? 0.4 : 0.15,
@@ -181,7 +188,9 @@ class _ExperienceCardWrapperState extends State<_ExperienceCardWrapper> {
                         boxShadow: _isHovered
                             ? [
                                 BoxShadow(
-                                  color: AppColors.accentPrimary.withValues(alpha: 0.1),
+                                  color: AppColors.accentPrimary.withValues(
+                                    alpha: 0.1,
+                                  ),
                                   blurRadius: 30,
                                   offset: const Offset(0, 10),
                                 ),
@@ -209,23 +218,23 @@ class _ExperienceCardWrapperState extends State<_ExperienceCardWrapper> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 12),
+                            padding: EdgeInsets.only(left: isMobile ? 8 : 12),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   widget.exp.role,
                                   style: GoogleFonts.outfit(
-                                    fontSize: 20,
+                                    fontSize: isMobile ? 17 : 20,
                                     fontWeight: FontWeight.w700,
                                     color: AppColors.textPrimary,
                                   ),
                                 ),
-                                const SizedBox(height: 6),
+                                const SizedBox(height: 5),
                                 Text(
                                   widget.exp.company,
                                   style: GoogleFonts.poppins(
-                                    fontSize: 15,
+                                    fontSize: isMobile ? 13.5 : 15,
                                     fontWeight: FontWeight.w600,
                                     color: AppColors.accentPrimary,
                                   ),
@@ -235,35 +244,49 @@ class _ExperienceCardWrapperState extends State<_ExperienceCardWrapper> {
                                   children: [
                                     Icon(
                                       Icons.calendar_today_rounded,
-                                      size: 12,
-                                      color: AppColors.textSecondary.withValues(alpha: 0.7),
+                                      size: 11,
+                                      color: AppColors.textSecondary.withValues(
+                                        alpha: 0.7,
+                                      ),
                                     ),
-                                    const SizedBox(width: 6),
+                                    const SizedBox(width: 5),
                                     Text(
                                       widget.exp.period,
                                       style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        color: AppColors.textSecondary.withValues(alpha: 0.8),
+                                        fontSize: 11.5,
+                                        color: AppColors.textSecondary
+                                            .withValues(alpha: 0.8),
                                       ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 12),
-                                // Scrollable Description
-                                ConstrainedBox(
-                                  constraints: const BoxConstraints(maxHeight: 120),
-                                  child: SingleChildScrollView(
-                                    physics: const BouncingScrollPhysics(),
-                                    child: Text(
-                                      widget.exp.description,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 14,
-                                        color: AppColors.textSecondary,
-                                        height: 1.6,
+                                const SizedBox(height: 10),
+                                isMobile
+                                    ? Text(
+                                        widget.exp.description,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 13,
+                                          color: AppColors.textSecondary,
+                                          height: 1.55,
+                                        ),
+                                      )
+                                    : ConstrainedBox(
+                                        constraints: const BoxConstraints(
+                                          maxHeight: 120,
+                                        ),
+                                        child: SingleChildScrollView(
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          child: Text(
+                                            widget.exp.description,
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              color: AppColors.textSecondary,
+                                              height: 1.6,
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                           ),

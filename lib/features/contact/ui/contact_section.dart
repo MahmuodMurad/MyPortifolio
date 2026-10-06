@@ -55,7 +55,7 @@ class _ContactSectionState extends State<ContactSection>
         icon: Icons.email_outlined,
         title: 'Email',
         value: info['email'] ?? '',
-        url: 'mailto:${info['email'] ?? ''}',
+        url: links['email'] ?? 'mailto:${info['email'] ?? ''}',
       ),
       _ContactItem(
         icon: FontAwesomeIcons.whatsapp,
@@ -75,53 +75,96 @@ class _ContactSectionState extends State<ContactSection>
         value: 'MahmuodMurad',
         url: links['github'] ?? '',
       ),
+      _ContactItem(
+        icon: FontAwesomeIcons.linkedinIn,
+        title: 'LinkedIn',
+        value: 'mahmuod-murad',
+        url: links['linkedin'] ?? '',
+      ),
+      _ContactItem(
+        icon: Icons.public_rounded,
+        title: 'Portfolio',
+        value: 'Live website',
+        url: links['portfolio'] ?? '',
+      ),
     ];
+
+    final isMobile = Responsive.isMobile(context);
 
     return Container(
       padding: Responsive.getSectionPadding(context),
-      constraints:
-          BoxConstraints(maxWidth: Responsive.getContentWidth(context)),
+      constraints: BoxConstraints(
+        maxWidth: Responsive.getContentWidth(context),
+      ),
       child: Column(
         children: [
-          const SectionTitle(
-            title: 'Contact',
-            subtitle: 'Let\'s connect',
-          ),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: Responsive.isMobile(context) ? 1 : 2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              childAspectRatio: Responsive.isMobile(context) ? 3.5 : 2.8,
-            ),
-            itemCount: contactItems.length,
-            itemBuilder: (context, index) {
-              return AnimatedBuilder(
-                animation: _controller,
-                builder: (context, child) {
-                  final delay = index / contactItems.length;
-                  final progress =
-                      ((_controller.value - delay) / (1 - delay))
-                          .clamp(0.0, 1.0);
-                  return Opacity(
-                    opacity: progress,
-                    child: Transform.translate(
-                      offset: Offset(0, 20 * (1 - progress)),
-                      child: child,
+          const SectionTitle(title: 'Contact', subtitle: 'Let\'s connect'),
+          if (isMobile)
+            Column(
+              children: List.generate(contactItems.length, (index) {
+                final delay = index / contactItems.length;
+                return AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, child) {
+                    final progress = ((_controller.value - delay) / (1 - delay))
+                        .clamp(0.0, 1.0);
+                    return Opacity(
+                      opacity: progress,
+                      child: Transform.translate(
+                        offset: Offset(0, 20 * (1 - progress)),
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: _WavingContactCard(
+                      item: contactItems[index],
+                      isMobile: true,
+                      onTap: contactItems[index].url.isNotEmpty
+                          ? () => _launchUrl(contactItems[index].url)
+                          : null,
                     ),
-                  );
-                },
-                child: _WavingContactCard(
-                  item: contactItems[index],
-                  onTap: contactItems[index].url.isNotEmpty
-                      ? () => _launchUrl(contactItems[index].url)
-                      : null,
-                ),
-              );
-            },
-          ),
+                  ),
+                );
+              }),
+            )
+          else
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 3.0,
+              ),
+              itemCount: contactItems.length,
+              itemBuilder: (context, index) {
+                final delay = index / contactItems.length;
+                return AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, child) {
+                    final progress = ((_controller.value - delay) / (1 - delay))
+                        .clamp(0.0, 1.0);
+                    return Opacity(
+                      opacity: progress,
+                      child: Transform.translate(
+                        offset: Offset(0, 20 * (1 - progress)),
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: _WavingContactCard(
+                    item: contactItems[index],
+                    isMobile: false,
+                    onTap: contactItems[index].url.isNotEmpty
+                        ? () => _launchUrl(contactItems[index].url)
+                        : null,
+                  ),
+                );
+              },
+            ),
           const SizedBox(height: 30),
           // Download CV Button
           _AnimatedDownloadButton(
@@ -136,7 +179,7 @@ class _ContactSectionState extends State<ContactSection>
 }
 
 class _ContactItem {
-  final IconData icon;
+  final dynamic icon;
   final String title;
   final String value;
   final String url;
@@ -152,8 +195,13 @@ class _ContactItem {
 class _WavingContactCard extends StatefulWidget {
   final _ContactItem item;
   final VoidCallback? onTap;
+  final bool isMobile;
 
-  const _WavingContactCard({required this.item, this.onTap});
+  const _WavingContactCard({
+    required this.item,
+    this.onTap,
+    this.isMobile = false,
+  });
 
   @override
   State<_WavingContactCard> createState() => _WavingContactCardState();
@@ -189,26 +237,32 @@ class _WavingContactCardState extends State<_WavingContactCard>
         child: AnimatedBuilder(
           animation: _waveController,
           builder: (context, child) {
-            final waveAngle = sin(_waveController.value * 2 * pi) *
+            final waveAngle =
+                sin(_waveController.value * 2 * pi) *
                 (_isHovered ? 0.04 : 0.02);
-            return Transform.rotate(
-              angle: waveAngle,
-              child: child,
-            );
+            return Transform.rotate(angle: waveAngle, child: child);
           },
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             transform: Matrix4.diagonal3Values(
-                _isHovered ? 1.03 : 1.0, _isHovered ? 1.03 : 1.0, 1.0),
+              _isHovered ? 1.03 : 1.0,
+              _isHovered ? 1.03 : 1.0,
+              1.0,
+            ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(widget.isMobile ? 12 : 8),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: widget.isMobile ? 14 : 20,
+                    vertical: widget.isMobile ? 12 : 18,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.surface.withValues(alpha: 0.6),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(
+                      widget.isMobile ? 12 : 8,
+                    ),
                     border: Border.all(
                       color: _isHovered
                           ? AppColors.accentPrimary.withValues(alpha: 0.4)
@@ -217,8 +271,9 @@ class _WavingContactCardState extends State<_WavingContactCard>
                     boxShadow: _isHovered
                         ? [
                             BoxShadow(
-                              color: AppColors.accentPrimary
-                                  .withValues(alpha: 0.15),
+                              color: AppColors.accentPrimary.withValues(
+                                alpha: 0.15,
+                              ),
                               blurRadius: 20,
                               spreadRadius: 2,
                             ),
@@ -228,19 +283,27 @@ class _WavingContactCardState extends State<_WavingContactCard>
                   child: Row(
                     children: [
                       Container(
-                        width: 46,
-                        height: 46,
+                        width: widget.isMobile ? 40 : 46,
+                        height: widget.isMobile ? 40 : 46,
                         decoration: BoxDecoration(
                           gradient: AppColors.accentGradient,
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Icon(
-                          widget.item.icon,
-                          color: Colors.white,
-                          size: 20,
+                        child: Center(
+                          child: widget.item.icon is FaIconData
+                              ? FaIcon(
+                                  widget.item.icon as FaIconData,
+                                  color: Colors.white,
+                                  size: widget.isMobile ? 18 : 20,
+                                )
+                              : Icon(
+                                  widget.item.icon as IconData,
+                                  color: Colors.white,
+                                  size: widget.isMobile ? 18 : 20,
+                                ),
                         ),
                       ),
-                      const SizedBox(width: 14),
+                      SizedBox(width: widget.isMobile ? 12 : 14),
                       Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -268,10 +331,11 @@ class _WavingContactCardState extends State<_WavingContactCard>
                       ),
                       if (widget.onTap != null)
                         Icon(
-                          Icons.arrow_forward_ios,
-                          size: 14,
-                          color:
-                              AppColors.textSecondary.withValues(alpha: 0.5),
+                          Icons.arrow_forward_ios_rounded,
+                          size: 13,
+                          color: AppColors.accentPrimary.withValues(
+                            alpha: widget.isMobile ? 0.7 : 0.5,
+                          ),
                         ),
                     ],
                   ),
@@ -317,15 +381,17 @@ class _AnimatedDownloadButtonState extends State<_AnimatedDownloadButton>
 
     _iconBounceAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0, end: -4).chain(
-          CurveTween(curve: Curves.easeOut),
-        ),
+        tween: Tween<double>(
+          begin: 0,
+          end: -4,
+        ).chain(CurveTween(curve: Curves.easeOut)),
         weight: 50,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: -4, end: 0).chain(
-          CurveTween(curve: Curves.bounceOut),
-        ),
+        tween: Tween<double>(
+          begin: -4,
+          end: 0,
+        ).chain(CurveTween(curve: Curves.bounceOut)),
         weight: 50,
       ),
     ]).animate(_hoverIconController);
@@ -342,8 +408,10 @@ class _AnimatedDownloadButtonState extends State<_AnimatedDownloadButton>
     return AnimatedBuilder(
       animation: widget.controller,
       builder: (context, child) {
-        final progress =
-            ((widget.controller.value - 0.6) / 0.4).clamp(0.0, 1.0);
+        final progress = ((widget.controller.value - 0.6) / 0.4).clamp(
+          0.0,
+          1.0,
+        );
         return Opacity(
           opacity: progress,
           child: Transform.translate(
@@ -364,19 +432,30 @@ class _AnimatedDownloadButtonState extends State<_AnimatedDownloadButton>
           _hoverIconController.reverse();
         },
         child: GestureDetector(
-          onTap: widget.url.isNotEmpty ? () => widget.onLaunch(widget.url) : null,
+          onTap: widget.url.isNotEmpty
+              ? () => widget.onLaunch(widget.url)
+              : null,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             transform: Matrix4.diagonal3Values(
-                _isHovered ? 1.05 : 1.0, _isHovered ? 1.05 : 1.0, 1.0),
-            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
+              _isHovered ? 1.05 : 1.0,
+              _isHovered ? 1.05 : 1.0,
+              1.0,
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: Responsive.isMobile(context) ? 28 : 36,
+              vertical: Responsive.isMobile(context) ? 14 : 16,
+            ),
             decoration: BoxDecoration(
               gradient: AppColors.accentGradient,
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(
+                Responsive.isMobile(context) ? 12 : 8,
+              ),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.accentPrimary.withValues(
-                      alpha: _isHovered ? 0.6 : 0.35),
+                    alpha: _isHovered ? 0.6 : 0.35,
+                  ),
                   blurRadius: _isHovered ? 30 : 20,
                   spreadRadius: _isHovered ? 4 : 2,
                   offset: Offset(0, _isHovered ? 8 : 4),

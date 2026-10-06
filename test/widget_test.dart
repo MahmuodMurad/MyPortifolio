@@ -9,5 +9,7 @@ void main() {
 
     // Verify splash screen content
     expect(find.byType(SplashScreen), findsOneWidget);
+    await tester.pump(const Duration(milliseconds: 2500));
+    await tester.pump(const Duration(milliseconds: 600));
   });
 }

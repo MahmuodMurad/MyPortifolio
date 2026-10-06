@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class Responsive {
   static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width < 600;
+      MediaQuery.of(context).size.width < 768;
 
   static bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 600 &&
+      MediaQuery.of(context).size.width >= 768 &&
       MediaQuery.of(context).size.width < 1024;
 
   static bool isDesktop(BuildContext context) =>
@@ -26,8 +26,8 @@ class Responsive {
   static double getContentWidth(BuildContext context) {
     final width = screenWidth(context);
     if (width > 1200) return 1200;
-    if (width > 600) return width * 0.9;
-    return width * 0.92;
+    if (width > 768) return width * 0.9;
+    return width * 0.95;
   }
 
   static EdgeInsets getSectionPadding(BuildContext context) {
@@ -37,6 +37,6 @@ class Responsive {
     if (isTablet(context)) {
       return const EdgeInsets.symmetric(horizontal: 40, vertical: 40);
     }
-    return const EdgeInsets.symmetric(horizontal: 20, vertical: 30);
+    return const EdgeInsets.symmetric(horizontal: 16, vertical: 28);
   }
 }
