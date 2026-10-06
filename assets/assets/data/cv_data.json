@@ -1,0 +1,456 @@
+{
+  "personal_info": {
+    "name": "Mahmoud E. Murad",
+    "role": "Flutter and Backend Developer",
+    "tagline": "Product-minded lead developer building Flutter apps, APIs, dashboards, and launch-ready mobile products.",
+    "location": "Alexandria, Egypt",
+    "phone": "+20 115 037 4990",
+    "email": "mahmoudmorad56o@gmail.com",
+    "stats": [
+      {
+        "label": "Years Experience",
+        "value": "3+"
+      },
+      {
+        "label": "Active Users",
+        "value": "50K+"
+      },
+      {
+        "label": "Production Apps",
+        "value": "14+"
+      }
+    ],
+    "links": {
+      "github": "https://github.com/MahmuodMurad",
+      "linkedin": "https://www.linkedin.com/in/mahmuod-murad-b19243203",
+      "portfolio": "https://mahmuodmurad.github.io/MyPortifolio/",
+      "whatsapp": "https://wa.me/201150374990",
+      "email": "mailto:mahmoudmorad56o@gmail.com",
+      "cv_download": "https://drive.google.com/file/d/15bDoRWuBkFLkbi--divdF76zDhULs8Qc/view?usp=sharing"
+    },
+    "summary": "Product-minded Flutter and Backend Developer with 3+ years of experience owning mobile products end to end, from architecture and API design through UI implementation, deployment, and post-launch iteration. Lead Developer at Qatfa Code, delivering client software across e-commerce, healthcare, fitness, on-demand marketplaces, and POS systems. Comfortable designing REST APIs and databases with Node.js, Express, Prisma, PostgreSQL, and Supabase, alongside Flutter, Firebase, and native Kotlin work."
+  },
+  "experience": [
+    {
+      "role": "Lead Developer",
+      "company": "Qatfa Code - Remote",
+      "period": "2025 - Present",
+      "description": "Own client mobile and web products end to end, including requirements, architecture, backend and API design, Flutter implementation, deployment, and iteration. Led AROX with a Node.js REST API, real-time bidding/chat, and commission billing, and built Mazid Mart with Flutter and Supabase."
+    },
+    {
+      "role": "Flutter Developer",
+      "company": "Icon Tech - Alexandria, Egypt",
+      "period": "Sep 2024 - Mar 2025, Mar 2026 - Present",
+      "description": "Developed and maintained cross-platform mobile applications for clients across iOS and Android. Collaborated with design and backend teams to deliver polished UI, API integrations, and production apps including Eldalel, Nottr, AL Melhem, PharmaShop, Meras Gym, and AlShateer."
+    },
+    {
+      "role": "Flutter Developer",
+      "company": "Queue Company - Remote",
+      "period": "Oct 2023 - Aug 2024",
+      "description": "Built and maintained scalable mobile and web applications, including the Request on-demand app suite for client, store, and order management using Flutter, MVVM, GetX, and FCM."
+    },
+    {
+      "role": "Flutter Instructor",
+      "company": "Easy Way Academy - Alexandria, Egypt",
+      "period": "Jul 2024 - Mar 2025",
+      "description": "Designed and delivered a Flutter curriculum covering Dart, state management, API integration, and real-world project workflows."
+    },
+    {
+      "role": "Flutter Instructor",
+      "company": "Black Horses - Alexandria, Egypt",
+      "period": "Dec 2023 - Jun 2024",
+      "description": "Delivered specialized Flutter training on advanced topics including state management, clean architecture, and production patterns."
+    },
+    {
+      "role": "Flutter Instructor and Head of Community",
+      "company": "GDSC - Kafr El Sheikh University",
+      "period": "Oct 2023 - Jun 2024",
+      "description": "Led the Flutter community track, providing technical training and mentoring to university students."
+    },
+    {
+      "role": "Flutter Developer - Volunteer",
+      "company": "UCCD - Kafr El Sheikh University",
+      "period": "Jan 2023 - Oct 2023",
+      "description": "Volunteered to develop faculty workflow systems that improved administrative processes through mobile technology."
+    }
+  ],
+  "projects": [
+    {
+      "name": "AROX",
+      "category": "On-Demand Services Marketplace",
+      "impact": "Full-stack product - client, craftsman, and admin apps",
+      "description": "Led the product from design through production with client, craftsman, and admin experiences. Designed and built the Node.js REST API backend covering auth, bidding, chat, billing, dispute resolution, Google Maps discovery, and Firebase Cloud Messaging.",
+      "technologies": [
+        "Flutter",
+        "Dart",
+        "Bloc/Cubit",
+        "Node.js",
+        "REST API",
+        "Firebase FCM",
+        "Google Maps",
+        "Clean Architecture"
+      ],
+      "images": [
+        "assets/images/Arox1.webp",
+        "assets/images/Arox2.webp",
+        "assets/images/Arox3.webp",
+        "assets/images/Arox4.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.qatfa.arox&pli=1",
+        "app_store": "https://apps.apple.com/us/app/arox/id6809708192"
+      }
+    },
+    {
+      "name": "Mazid Mart",
+      "category": "E-Commerce",
+      "impact": "Full-stack Supabase commerce app",
+      "description": "Built a production-ready e-commerce app for silver products using Clean Architecture, Flutter, and Supabase REST APIs. Implemented authentication, cart, order management, and FCM push notifications.",
+      "technologies": [
+        "Flutter",
+        "Cubit",
+        "Supabase",
+        "REST API",
+        "FCM",
+        "Clean Architecture"
+      ],
+      "images": [
+        "assets/images/Mazid1.webp",
+        "assets/images/Mazid2.webp",
+        "assets/images/Mazid3.webp",
+        "assets/images/Mazid4.webp",
+        "assets/images/Mazid5.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.qatfa.mazid_silver_customer",
+        "app_store": "https://apps.apple.com/ae/app/mazidmart/id6767023443",
+        "admin_play": "https://play.google.com/store/apps/details?id=com.qatfa.mazid_silver_admin",
+        "admin_app_store": "https://apps.apple.com/ae/app/mazid/id6766320475"
+      }
+    },
+    {
+      "name": "Eldalel",
+      "category": "Jobs and Services",
+      "impact": "50,000+ active users",
+      "description": "Led the UI redesign, delivered the Dalel El Waza2ef feature, and improved app performance and stability for a large active user base.",
+      "technologies": [
+        "Flutter",
+        "Provider",
+        "Riverpod",
+        "FCM",
+        "Performance"
+      ],
+      "images": [
+        "assets/images/Eldalel1.webp",
+        "assets/images/Eldalel2.webp",
+        "assets/images/Eldalel3.webp",
+        "assets/images/Eldalel4.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontds.a7sn_wa7ed",
+        "app_store": "https://apps.apple.com/us/app/eldalel/id6443826620"
+      }
+    },
+    {
+      "name": "PharmaShop",
+      "category": "Healthcare Commerce",
+      "impact": "Real-time chat and prescription scanning",
+      "description": "Enhanced the medicine ordering experience with real-time chat, prescription scanning, smoother animations, and performance improvements.",
+      "technologies": [
+        "Flutter",
+        "Cubit",
+        "FCM",
+        "Chat",
+        "Prescription Scan"
+      ],
+      "images": [
+        "assets/images/PharmaShop1.webp",
+        "assets/images/PharmaShop2.webp",
+        "assets/images/PharmaShop3.webp",
+        "assets/images/PharmaShop4.webp",
+        "assets/images/PharmaShop5.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontech.pharmacy",
+        "app_store": "https://apps.apple.com/eg/app/pharmashop/id6648774724"
+      }
+    },
+    {
+      "name": "Meras Gym",
+      "category": "Fitness Management",
+      "impact": "Subscriptions, payments, and QR coach flows",
+      "description": "Built a gym management app with package subscriptions, session scheduling, online and cash payments through Paylink, and QR-based coach-to-user registration.",
+      "technologies": [
+        "Flutter",
+        "Provider",
+        "Paylink",
+        "QR",
+        "iOS",
+        "Android"
+      ],
+      "images": [
+        "assets/images/Meras1.webp",
+        "assets/images/Meras2.webp",
+        "assets/images/Meras3.webp",
+        "assets/images/Meras4.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontds.merasgym",
+        "app_store": "https://apps.apple.com/us/app/meras/id6738954150"
+      }
+    },
+    {
+      "name": "Nottr",
+      "category": "Invoicing",
+      "impact": "ZATCA-compliant QR invoicing",
+      "description": "Redesigned the interface, enhanced core functionality, optimized performance, and integrated ZATCA-compliant QR code generation for invoicing.",
+      "technologies": [
+        "Flutter",
+        "Provider",
+        "ZATCA QR",
+        "Xcode",
+        "Performance"
+      ],
+      "images": [
+        "assets/images/Nottr1.webp",
+        "assets/images/Nottr2.webp",
+        "assets/images/Nottr3.webp",
+        "assets/images/Nottr4.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontds.notter_client",
+        "app_store": "https://apps.apple.com/sa/app/nottr/id6478277259"
+      }
+    },
+    {
+      "name": "AL Melhem",
+      "category": "Family Platform",
+      "impact": "Refreshed UI and improved performance",
+      "description": "Delivered a new version with a refreshed interface, enhanced key features, Firebase notifications, and measurable performance improvements.",
+      "technologies": [
+        "Flutter",
+        "Cubit",
+        "FCM",
+        "iOS",
+        "Android"
+      ],
+      "images": [
+        "assets/images/Almelhem1.webp",
+        "assets/images/Almelhem2.webp",
+        "assets/images/Almelhem3.webp",
+        "assets/images/Almelhem4.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.almelhem.icontds",
+        "app_store": "https://apps.apple.com/sa/app/id6504810048"
+      }
+    },
+    {
+      "name": "AlShateer",
+      "category": "Commerce",
+      "impact": "Faster image loading and smoother animation",
+      "description": "Optimized image handling and caching, refined UI animations, and reduced load times across the app experience.",
+      "technologies": [
+        "Flutter",
+        "Provider",
+        "Caching",
+        "Animation",
+        "GitHub"
+      ],
+      "images": [
+        "assets/images/ALshater1.webp",
+        "assets/images/ALshater2.webp",
+        "assets/images/ALshater3.webp",
+        "assets/images/ALshater4.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.alshateer.icontds"
+      }
+    },
+    {
+      "name": "AlBaraka",
+      "category": "Retail",
+      "impact": "1,000+ active users",
+      "description": "Enhanced Android app stability, implemented a force-update mechanism, and added dynamic social media integrations.",
+      "technologies": [
+        "Kotlin",
+        "Android Studio",
+        "Force Update",
+        "GitHub"
+      ],
+      "images": [
+        "assets/images/Elbaraka1.webp",
+        "assets/images/Elbarka2.webp",
+        "assets/images/Elbarka3.webp",
+        "assets/images/Elbarka4.webp",
+        "assets/images/Elbarka5.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.techcubics.albarkahyper",
+        "dashboard": "https://play.google.com/store/apps/details?id=com.techcubics.albarkahyperdashboard"
+      }
+    },
+    {
+      "name": "LORD HR",
+      "category": "Human Resources",
+      "impact": "1,000+ active users",
+      "description": "Built an HR app from scratch with role-based access, salary viewing, document upload, news, and push notifications, designed for older non-technical employees.",
+      "technologies": [
+        "Flutter",
+        "Role Access",
+        "Documents",
+        "FCM",
+        "UX"
+      ],
+      "images": [
+        "assets/images/Lord1.webp",
+        "assets/images/Lord2.webp",
+        "assets/images/Lord3.webp",
+        "assets/images/Lord4.webp",
+        "assets/images/Lord5.webp"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.icontds.lord_international"
+      }
+    },
+    {
+      "name": "QR Menu",
+      "category": "SaaS Digital Menu Platform",
+      "impact": "Flutter Web with live dashboard themes",
+      "description": "Built a restaurant and cafe digital menu platform with six customizable themes, distance calculation, multiple payment methods, ordering options, live owner dashboard control, and customer access through QR codes.",
+      "technologies": [
+        "Flutter Web",
+        "Dashboard",
+        "Payments",
+        "QR",
+        "SaaS"
+      ],
+      "images": [],
+      "links": {
+        "themes": "https://qr.iconapp.site/#themes"
+      }
+    },
+    {
+      "name": "Request",
+      "category": "On-Demand App Suite",
+      "impact": "1,000+ active users",
+      "description": "Architected a multi-app on-demand platform for client, store, and order management using Flutter, MVVM, GetX, and Firebase Cloud Messaging.",
+      "technologies": [
+        "Flutter",
+        "MVVM",
+        "GetX",
+        "FCM",
+        "Multi-App"
+      ],
+      "images": [
+        "assets/images/Request1.jpeg",
+        "assets/images/Request2.jpeg",
+        "assets/images/Request3.jpeg",
+        "assets/images/Request4.jpeg",
+        "assets/images/Request5.jpeg"
+      ],
+      "links": {
+        "play_store": "https://play.google.com/store/apps/details?id=com.Request.request",
+        "store_play": "https://play.google.com/store/apps/details?id=com.RequestStore.request_store",
+        "app_store": "https://apps.apple.com/us/app/request-%D8%A7%D8%B7%D9%84%D8%A8/id6756569829"
+      }
+    },
+    {
+      "name": "Aupos",
+      "category": "Point of Sale",
+      "impact": "Distributed as APK",
+      "description": "Built a POS app for transaction management, inventory tracking, sales reporting, and receipt printing.",
+      "technologies": [
+        "Flutter",
+        "Inventory",
+        "Reports",
+        "Receipts",
+        "Android"
+      ],
+      "images": [],
+      "links": {
+        "apk": "Distributed as APK"
+      }
+    }
+  ],
+  "skills": {
+    "flutter_framework": [
+      {
+        "name": "Flutter",
+        "level": 0.98
+      },
+      {
+        "name": "Dart",
+        "level": 0.96
+      },
+      {
+        "name": "Bloc / Cubit",
+        "level": 0.94
+      },
+      {
+        "name": "Provider",
+        "level": 0.9
+      },
+      {
+        "name": "GetX",
+        "level": 0.86
+      },
+      {
+        "name": "Riverpod",
+        "level": 0.82
+      },
+      {
+        "name": "Firebase",
+        "level": 0.9
+      },
+      {
+        "name": "Animations",
+        "level": 0.92
+      }
+    ],
+    "general_concepts": [
+      {
+        "name": "Node.js / Express",
+        "level": 0.86
+      },
+      {
+        "name": "Prisma / PostgreSQL",
+        "level": 0.82
+      },
+      {
+        "name": "Supabase",
+        "level": 0.9
+      },
+      {
+        "name": "REST API Design",
+        "level": 0.94
+      },
+      {
+        "name": "Clean Architecture",
+        "level": 0.92
+      },
+      {
+        "name": "Kotlin",
+        "level": 0.76
+      },
+      {
+        "name": "GitHub Actions",
+        "level": 0.78
+      },
+      {
+        "name": "Product Ownership",
+        "level": 0.92
+      }
+    ],
+    "languages": [
+      {
+        "name": "Arabic",
+        "level": 1.0
+      },
+      {
+        "name": "English",
+        "level": 0.82
+      }
+    ]
+  }
+}
