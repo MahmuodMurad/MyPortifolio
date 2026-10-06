@@ -1,7 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="/">
+  <script>
+    // GitHub Pages auto base-href resolver
+    (function () {
+      var pathname = window.location.pathname;
+      if (window.location.hostname.endsWith('github.io') && pathname.length > 1) {
+        var segments = pathname.split('/').filter(Boolean);
+        if (segments.length > 0) {
+          var repo = segments[0];
+          var base = document.querySelector('base');
+          var targetHref = '/' + repo + '/';
+          if (base) {
+            base.setAttribute('href', targetHref);
+          } else {
+            var el = document.createElement('base');
+            el.setAttribute('href', targetHref);
+            document.head.prepend(el);
+          }
+        }
+      }
+    })();
+  </script>
+  <base href="/MyPortifolio/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -182,7 +203,7 @@
       <section class="portrait-stage">
         <div class="frame-a"></div>
         <div class="frame-b"></div>
-        <img class="portrait" src="assets/assets/images/myimage.jpeg" alt="Mahmoud Murad">
+        <img class="portrait" src="assets/assets/images/myimage.jpeg" onerror="this.onerror=null;this.src='assets/images/myimage.jpeg';" alt="Mahmoud Murad">
       </section>
       <section>
         <h1 class="name">Mahmoud E. Murad</h1>
